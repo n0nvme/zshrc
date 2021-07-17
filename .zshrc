@@ -90,3 +90,7 @@ run_vdir() {
 alias ls="run_ls"
 alias dir="run_dir"
 alias vdir="run_vdir"
+
+if [[ -n $TERM=="xterm-kitty" ]]; then
+  alias ssh="kitty +kitten ssh"
+fi
