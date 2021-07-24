@@ -102,3 +102,4 @@ complete -F __start_kubectl k
 
 export PATH="$PATH:$HOME/.poetry/bin"
 export PATH="$PATH:$HOME/.pyenv/bin"
+eval "$(pyenv init -)"
