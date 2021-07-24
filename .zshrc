@@ -93,5 +93,12 @@ alias vdir="run_vdir"
 
 if [[ -n $TERM=="xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
+  alias icat="kitty +kitten icat"
+  kitty +kitten icat --align left ~/Pictures/rick_alpha_small.png
 fi
-alias icat="kitty +kitten icat"
+
+alias k=kubectl
+complete -F __start_kubectl k
+
+export PATH="$PATH:$HOME/.poetry/bin"
+export PATH="$PATH:$HOME/.pyenv/bin"
