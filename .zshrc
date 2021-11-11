@@ -97,9 +97,29 @@ if [[ -n $TERM=="xterm-kitty" ]]; then
   kitty +kitten icat --align left ~/Pictures/rick_alpha_small.png
 fi
 
-alias k=kubectl
+alias k=kubecolor
 complete -F __start_kubectl k
+#export KUBECONFIG="/home/n0nvme/.kube/polymatika:/home/n0nvme/.kube/aps"
+export KUBECONFIG="/home/n0nvme/.kube/config"
 
 export PATH="$PATH:$HOME/.poetry/bin"
 export PATH="$PATH:$HOME/.pyenv/bin"
 eval "$(pyenv init -)"
+eval "$(nodenv init -)"
+
+# functiontrace
+export PATH="$PATH:$HOME/.cargo/bin"
+
+export PATH="$HOME/.vector/bin:$PATH"
+
+# The next line updates PATH for Yandex Cloud CLI.
+if [ -f '/home/n0nvme/yandex-cloud/path.bash.inc' ]; then source '/home/n0nvme/yandex-cloud/path.bash.inc'; fi
+
+# The next line enables shell command completion for yc.
+if [ -f '/home/n0nvme/yandex-cloud/completion.zsh.inc' ]; then source '/home/n0nvme/yandex-cloud/completion.zsh.inc'; fi
+
+# gnome-keyring
+if [ -n "$DESKTOP_SESSION" ];then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
