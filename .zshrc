@@ -1,63 +1,49 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+POWERLEVEL9K_DIR_FOREGROUND=0
+POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=0
+POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=0
+POWERLEVEL9K_DIR_ANCHOR_BOLD=false
+POWERLEVEL9K_DISABLE_RPROMPT=true
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/n0nvme/.oh-my-zsh"
+if [[ ! -f ~/.antigen/antigen.zsh ]]; then
+  mkdir ~/.antigen
+  curl -L git.io/antigen > ~/.antigen/antigen.zsh
+fi
+source ~/.antigen/antigen.zsh
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle b4b4r07/emoji-cli
+# Load the theme.
+antigen theme romkatv/powerlevel10k
+
+# Tell Antigen that you're done.
+antigen apply
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
 # See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions history-substring-search zsh-syntax-highlighting)
-
-
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -66,30 +52,6 @@ export LC_ALL=en_US.UTF-8
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-
-# ls with icons
-
-LS_COLORS=$(ls_colors_generator)
-
-run_ls() {
-	ls-i --color=auto -w $(tput cols) "$@"
-}
-
-run_dir() {
-	dir-i --color=auto -w $(tput cols) "$@"
-}
-
-run_vdir() {
-	vdir-i --color=auto -w $(tput cols) "$@"
-}
-alias ls="run_ls"
-alias dir="run_dir"
-alias vdir="run_vdir"
 
 if [[ -n $TERM=="xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
@@ -97,15 +59,15 @@ if [[ -n $TERM=="xterm-kitty" ]]; then
   kitty +kitten icat --align left ~/Pictures/rick_alpha_small.png
 fi
 
+alias ls='exa --icons'
+
 alias k=kubecolor
 complete -F __start_kubectl k
-#export KUBECONFIG="/home/n0nvme/.kube/polymatika:/home/n0nvme/.kube/aps"
-export KUBECONFIG="/home/n0nvme/.kube/config"
 
 export PATH="$PATH:$HOME/.poetry/bin"
 export PATH="$PATH:$HOME/.pyenv/bin"
 eval "$(pyenv init -)"
-eval "$(nodenv init -)"
+#eval "$(nodenv init -)"
 
 # functiontrace
 export PATH="$PATH:$HOME/.cargo/bin"
@@ -117,9 +79,3 @@ if [ -f '/home/n0nvme/yandex-cloud/path.bash.inc' ]; then source '/home/n0nvme/y
 
 # The next line enables shell command completion for yc.
 if [ -f '/home/n0nvme/yandex-cloud/completion.zsh.inc' ]; then source '/home/n0nvme/yandex-cloud/completion.zsh.inc'; fi
-
-# gnome-keyring
-if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
-fi
