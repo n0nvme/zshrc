@@ -20,11 +20,12 @@ antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
 
-# Syntax highlighting bundle.
+# Syntax highlighting, colors & autosuggestion bundles.
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle b4b4r07/emoji-cli
+antigen bundle joel-porquet/zsh-dircolors-solarized.git
 # Load the theme.
 antigen theme romkatv/powerlevel10k
 
@@ -59,6 +60,8 @@ if [[ -n $TERM=="xterm-kitty" ]]; then
   kitty +kitten icat --align left ~/Pictures/rick_alpha_small.png
 fi
 
+setupsolarized
+eval "$(dircolors)"
 alias ls='exa --icons'
 
 alias k=kubecolor
