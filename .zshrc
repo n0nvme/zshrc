@@ -66,7 +66,8 @@ complete -F __start_kubectl k
 
 export PATH="$PATH:$HOME/.poetry/bin"
 export PATH="$PATH:$HOME/.pyenv/bin"
-eval "$(pyenv init -)"
+# https://stackoverflow.com/a/68228627/13242975
+eval "$(pyenv init --path)"
 #eval "$(nodenv init -)"
 
 # functiontrace
