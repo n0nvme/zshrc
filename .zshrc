@@ -71,6 +71,7 @@ export PATH="$PATH:$HOME/.poetry/bin"
 export PATH="$PATH:$HOME/.pyenv/bin"
 # https://stackoverflow.com/a/68228627/13242975
 eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
 #eval "$(nodenv init -)"
 
 # functiontrace
