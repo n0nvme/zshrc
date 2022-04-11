@@ -64,20 +64,26 @@ setupsolarized
 eval "$(dircolors)"
 alias ls='exa --icons'
 
+# Kubernetes
 alias k=kubecolor
 complete -F __start_kubectl k
 
+# Python
 export PATH="$PATH:$HOME/.poetry/bin"
 export PATH="$PATH:$HOME/.pyenv/bin"
 export PATH="$PATH:$HOME/.local/bin"
 # https://stackoverflow.com/a/68228627/13242975
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
-#eval "$(nodenv init -)"
 
-# functiontrace
+# Node.js
+source /usr/share/nvm/init-nvm.sh
+
+# Vector
 export PATH="$PATH:$HOME/.cargo/bin"
 
+# Other
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.vector/bin:$PATH"
 
 # The next line updates PATH for Yandex Cloud CLI.
